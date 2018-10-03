@@ -3,7 +3,7 @@
 A Symfony4 Bundle that provides authentication via Steam for your application.
 
 # FORK ALERT
-This is a fork, you can find the original awesome work from Knojector on [his repository](https://github.com/knojector/SteamAuthenticationBundle). I removed datas I didn't needed, and removed persisting automatically if user not already in database.
+This is a fork, you can find the original awesome work from Knojector on [his repository](https://github.com/knojector/SteamAuthenticationBundle). I removed datas I didn't needed.
 
 ## Installation & Configuration
 
