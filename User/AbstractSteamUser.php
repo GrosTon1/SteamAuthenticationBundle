@@ -19,39 +19,11 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
     protected $steamId;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $communityVisibilityState;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $profileState;
-
-    /**
      * @var string
      *
      * @ORM\Column(type="string")
      */
     protected $profileName;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(type="datetime")
-     */
-    protected $lastLogOff;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $commentPermission;
 
     /**
      * @var string
@@ -66,34 +38,6 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
      * @ORM\Column(type="string")
      */
     protected $avatar;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $personaState;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(type="bigint", nullable=true)
-     */
-    protected $primaryClanId;
-
-    /**
-     * @var \DateTime|null
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    protected $joinDate;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $countryCode;
 
     /**
      * @var array
@@ -121,38 +65,6 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getCommunityVisibilityState(): int
-    {
-        return $this->communityVisibilityState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCommunityVisibilityState(int $state)
-    {
-        $this->communityVisibilityState = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProfileState(): int
-    {
-        return $this->profileState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProfileState(int $state)
-    {
-        $this->profileState = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getProfileName(): string
     {
         return $this->profileName;
@@ -164,40 +76,6 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
     public function setProfileName(string $name)
     {
         $this->profileName = $name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastLogOff(): \DateTime
-    {
-        return $this->lastLogOff;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLastLogOff(int $lastLogOff)
-    {
-        $lastLogOffDate = new \DateTime();
-        $lastLogOffDate->setTimestamp($lastLogOff);
-        $this->lastLogOff = $lastLogOffDate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCommentPermission(): int
-    {
-        return $this->commentPermission;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCommentPermission(int $permission)
-    {
-        $this->commentPermission = $permission;
     }
 
     /**
@@ -230,76 +108,6 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
     public function setAvatar(string $avatar)
     {
         $this->avatar = $avatar;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPersonaState(): int
-    {
-        return $this->personaState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPersonaState(? int $state)
-    {
-        $this->personaState = $state;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getPrimaryClanId(): ?int
-    {
-        return $this->primaryClanId;
-    }
-
-    /**
-     * @param int|null $primaryClanId
-     */
-    public function setPrimaryClanId(?int $primaryClanId): void
-    {
-        $this->primaryClanId = $primaryClanId;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getJoinDate(): ?\DateTime
-    {
-        return $this->joinDate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setJoinDate(?int $joinDate): void
-    {
-        if (null !== $joinDate) {
-            $joinDateDate = new \DateTime();
-            $joinDateDate->setTimestamp($joinDate);
-            $joinDate = $joinDateDate;
-        }
-
-        $this->joinDate = $joinDate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCountryCode(): ?string
-    {
-        return $this->countryCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCountryCode(?string $countryCode): void
-    {
-        $this->countryCode = $countryCode;
     }
 
     /**
@@ -351,21 +159,8 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
      */
     public function update(array $userData)
     {
-        $this->setCommunityVisibilityState($userData['communityvisibilitystate']);
-        $this->setProfileState($userData['profilestate']);
         $this->setProfileName($userData['personaname']);
-        $this->setLastLogOff($userData['lastlogoff']);
-        $this->setCommentPermission(
-            isset($userData['commentpermission']) ? $userData['commentpermission'] : 0
-        );
         $this->setProfileUrl($userData['profileurl']);
         $this->setAvatar($userData['avatarfull']);
-        $this->setPersonaState($userData['personastate']);
-        $this->setPrimaryClanId(
-            isset($userData['primaryclanid']) ? $userData['primaryclanid'] : null
-        );
-        $this->setCountryCode(
-            isset($userData['loccountrycode']) ? $userData['loccountrycode'] : null
-        );
     }
 }

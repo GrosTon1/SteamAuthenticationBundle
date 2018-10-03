@@ -38,25 +38,9 @@ class UserFactory
         }
 
         $user->setSteamId($userData['steamid']);
-        $user->setCommunityVisibilityState($userData['communityvisibilitystate']);
-        $user->setProfileState($userData['profilestate']);
         $user->setProfileName($userData['personaname']);
-        $user->setLastLogOff($userData['lastlogoff']);
-        $user->setCommentPermission(
-            isset($userData['commentpermission']) ? $userData['commentpermission'] : 0
-        );
         $user->setProfileUrl($userData['profileurl']);
         $user->setAvatar($userData['avatarfull']);
-        $user->setPersonaState($userData['personastate']);
-        $user->setPrimaryClanId(
-            isset($userData['primaryclanid']) ? $userData['primaryclanid'] : null
-        );
-        $user->setJoinDate(
-            isset($userData['timecreated']) ? $userData['timecreated'] : null
-        );
-        $user->setCountryCode(
-            isset($userData['loccountrycode']) ? $userData['loccountrycode'] : null
-        );
 
         return $user;
     }
