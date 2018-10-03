@@ -63,6 +63,7 @@ class SteamUserProvider implements UserProviderInterface
         $userData = $this->api->loadProfile($username);
         if (null === $user) {
             $user = $this->userFactory->getFromSteamApiResponse($userData);
+            $this->entityManager->persist($user);
         } else {
             $user->update($userData);
         }
